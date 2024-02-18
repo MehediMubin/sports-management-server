@@ -9,6 +9,7 @@ export type TProduct = {
   material: string;
   color: string;
   condition: "new" | "used";
+  branch: string;
 };
 
 export interface Filter {

@@ -43,6 +43,10 @@ const productSchema = new Schema<TProduct>({
     enum: ["new", "used"],
     required: true,
   },
+  branch: {
+    type: String,
+    required: true,
+  },
 });
 
 export const ProductModel = model<TProduct>("Product", productSchema);
