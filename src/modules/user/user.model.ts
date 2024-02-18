@@ -12,6 +12,11 @@ const userSchema = new Schema<TUser>(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["superAdmin", "branchManager", "seller"],
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -1,9 +1,10 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../config";
+import { TUserRole } from "../modules/user/user.interface";
 import { UserModel } from "../modules/user/user.model";
 import catchAsync from "../utils/catchAsync";
 
-const auth = () => {
+const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req, res, next) => {
     // get token from the header
     const token = req.headers.authorization;
@@ -21,12 +22,17 @@ const auth = () => {
       throw new Error("Token is invalid");
     }
 
-    const { id } = decoded;
+    const { id, role } = decoded;
 
     const user = await UserModel.findById(id);
     if (!user) {
       throw new Error("User not found");
     }
+
+    if (requiredRoles && !requiredRoles.includes(role)) {
+      throw new Error("You are not authorized!");
+    }
+
     next();
   });
 };

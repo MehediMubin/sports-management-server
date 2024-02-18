@@ -16,6 +16,7 @@ const loginUser = async (username: string, password: string) => {
   const jwtPayload = {
     id: user._id,
     username: user.username,
+    role: user.role,
   };
 
   const accessToken = createToken(
@@ -48,6 +49,7 @@ const refreshToken = async (refreshToken: string) => {
   const jwtPayload = {
     id: user._id,
     username: user.username,
+    role: user.role,
   };
 
   const accessToken = createToken(
