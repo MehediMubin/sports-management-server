@@ -10,7 +10,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://storied-biscuit-df9268.netlify.app",
+    origin: "http://localhost:5173",
     credentials: true,
   }),
 );
