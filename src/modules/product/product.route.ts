@@ -4,35 +4,51 @@ import { ProductController } from "./product.controller";
 
 const router = Router();
 
-router.post("/create-product", auth(), ProductController.createProduct);
+router.post(
+  "/create-product",
+  auth("superAdmin", "branchManager"),
+  ProductController.createProduct,
+);
 
-router.get("/", auth(), ProductController.getAllProducts);
+router.get(
+  "/",
+  auth("superAdmin", "branchManager", "seller"),
+  ProductController.getAllProducts,
+);
 
-router.get("/:id", auth(), ProductController.getProductById);
+router.get(
+  "/:id",
+  auth("superAdmin", "branchManager", "seller"),
+  ProductController.getProductById,
+);
 
 router.get(
   "/product-by-name/:name",
-  auth(),
+  auth("superAdmin", "branchManager", "seller"),
   ProductController.getProductByName,
 );
 
 router.patch(
   "/update-product/:id",
-  auth(),
+  auth("superAdmin", "branchManager"),
   ProductController.updateProductById,
 );
 
-router.delete("/delete-products", auth(), ProductController.deleteProducts);
+router.delete(
+  "/delete-products",
+  auth("superAdmin", "branchManager"),
+  ProductController.deleteProducts,
+);
 
 router.delete(
   "/delete-product/:id",
-  auth(),
+  auth("superAdmin", "branchManager"),
   ProductController.deleteProductById,
 );
 
 router.delete(
   "/delete-multiple-products",
-  auth(),
+  auth("superAdmin", "branchManager"),
   ProductController.deleteMultipleProducts,
 );
 
