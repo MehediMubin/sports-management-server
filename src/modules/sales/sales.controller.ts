@@ -62,6 +62,16 @@ const getHistoryYearly = catchAsync(async (req, res) => {
   });
 });
 
+const getHistoryWithBranch = catchAsync(async (req, res) => {
+  const result = await SalesService.getHistoryWithBranch(req.body.branch);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Total quantity sold",
+    data: result,
+  });
+});
+
 export const SalesController = {
   sellProduct,
   getHistory,
@@ -69,4 +79,5 @@ export const SalesController = {
   getHistoryWeekly,
   getHistoryMonthly,
   getHistoryYearly,
+  getHistoryWithBranch,
 };
