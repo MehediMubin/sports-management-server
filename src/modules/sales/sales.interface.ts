@@ -3,6 +3,6 @@ export type TSale = {
   buyerName: string;
   quantity: number;
   totalPrice: number;
-  branchName: string;
+  branch: string;
   date: Date;
 };
