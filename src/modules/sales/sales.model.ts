@@ -7,7 +7,7 @@ const SalesSchema = new mongoose.Schema<TSale>(
     buyerName: { type: String, required: true },
     quantity: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
-    branchName: { type: string, required: true },
+    branchName: { type: String, required: true },
     date: { type: Date, required: true },
   },
   {
