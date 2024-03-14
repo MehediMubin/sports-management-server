@@ -31,7 +31,7 @@ router.get(
 router.get(
   "/history-monthly",
   // auth("superAdmin", "branchManager"),
-  SalesController.getHistoryMonthly,
+  SalesController.getSalesHistoryThisMonth,
 );
 
 router.get(

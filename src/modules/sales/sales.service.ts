@@ -141,57 +141,41 @@ const getSalesHistoryThisWeek = async (branchName: string) => {
   return result[0];
 };
 
-const getHistoryMonthly = async () => {
+const getSalesHistoryThisMonth = async (branchName: string) => {
   const oneMonthAgo = new Date();
   oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
 
+  const matchStage: { date: { $gte: Date }; branch?: string } = {
+    date: {
+      $gte: oneMonthAgo,
+    },
+  };
+
+  if (branchName !== "all-branches") {
+    matchStage.branch = branchName;
+  }
+
   const result = await SalesModel.aggregate([
     {
-      $match: {
-        date: {
-          $gte: oneMonthAgo,
-        },
-      },
+      $match: matchStage,
     },
     {
       $group: {
-        _id: {
-          month: { $month: "$date" },
-          productId: { $toObjectId: "$productId" },
-        },
+        _id: null, // Group all documents together
         totalQuantity: { $sum: "$quantity" },
         totalSellAmount: { $sum: "$totalPrice" },
       },
-    },
-    {
-      $lookup: {
-        from: "products",
-        localField: "_id.productId",
-        foreignField: "_id",
-        as: "product",
-      },
-    },
-    {
-      $unwind: "$product",
-    },
-    {
-      $sort: {
-        totalQuantity: -1,
-      },
-    },
-    {
-      $limit: 1,
     },
     {
       $project: {
         _id: 0,
         totalQuantity: 1,
         totalSellAmount: 1,
-        name: "$product.name",
       },
     },
   ]);
-  return result[0];
+
+  return result[0]; // Return the single aggregated result
 };
 
 const getHistoryYearly = async () => {
@@ -252,6 +236,6 @@ export const SalesService = {
   getSalesHistoryAllTime,
   getSalesHistoryToday,
   getSalesHistoryThisWeek,
-  getHistoryMonthly,
+  getSalesHistoryThisMonth,
   getHistoryYearly,
 };
