@@ -39,7 +39,7 @@ const sellProduct = async (payload: TSale) => {
   }
 };
 
-const getHistory = async () => {
+const getSalesHistoryAllTime = async () => {
   const result = await SalesModel.aggregate([
     {
       $group: {
@@ -79,15 +79,21 @@ const getHistory = async () => {
   return result[0];
 };
 
-const getHistoryDaily = async () => {
+const getSalesHistoryToday = async (branchName: string) => {
+  const matchStage: { date: { $gte: Date; $lte: Date }; branch?: string } = {
+    date: {
+      $gte: new Date(new Date().setHours(0, 0, 0)),
+      $lte: new Date(new Date().setHours(23, 59, 59)),
+    },
+  };
+
+  if (branchName !== "all-branches") {
+    matchStage.branch = branchName;
+  }
+
   const result = await SalesModel.aggregate([
     {
-      $match: {
-        date: {
-          $gte: new Date(new Date().setHours(0, 0, 0)),
-          $lte: new Date(new Date().setHours(23, 59, 59)),
-        },
-      },
+      $match: matchStage,
     },
     {
       $group: {
@@ -286,25 +292,11 @@ const getHistoryYearly = async () => {
   return result[0];
 };
 
-const getBranchHistory = async (branch: string) => {
-  if (branch === "All Branches") {
-    branch = "all-branches";
-    const result = await SalesModel.find().select("totalPrice");
-    return result.reduce((acc, cur) => acc + cur.totalPrice, 0);
-  } else {
-    const result = await SalesModel.find({ branch: branch }).select(
-      "totalPrice",
-    );
-    return result.reduce((acc, cur) => acc + cur.totalPrice, 0);
-  }
-};
-
 export const SalesService = {
   sellProduct,
-  getHistory,
-  getHistoryDaily,
+  getSalesHistoryAllTime,
+  getSalesHistoryToday,
   getHistoryWeekly,
   getHistoryMonthly,
   getHistoryYearly,
-  getBranchHistory,
 };

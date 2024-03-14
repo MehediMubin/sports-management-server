@@ -18,8 +18,8 @@ router.get(
 
 router.get(
   "/history-daily",
-  auth("superAdmin", "branchManager"),
-  SalesController.getHistoryDaily,
+  // auth("superAdmin", "branchManager"),
+  SalesController.getSalesHistoryToday,
 );
 
 router.get(
@@ -38,12 +38,6 @@ router.get(
   "/history-yearly",
   auth("superAdmin", "branchManager"),
   SalesController.getHistoryYearly,
-);
-
-router.get(
-  "/branch-history",
-  // auth("superAdmin", "branchManager"),
-  SalesController.getBranchHistory,
 );
 
 export const SalesRoute = router;
