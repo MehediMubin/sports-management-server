@@ -286,8 +286,8 @@ const getHistoryYearly = async () => {
   return result[0];
 };
 
-const getHistoryWithBranch = async (branch: string) => {
-  if (branch === "All Branches") {
+const getBranchHistory = async (branch: string) => {
+  if (branch === "all-branches") {
     const result = await SalesModel.find().select("totalPrice");
     return result.reduce((acc, cur) => acc + cur.totalPrice, 0);
   } else {
@@ -305,5 +305,5 @@ export const SalesService = {
   getHistoryWeekly,
   getHistoryMonthly,
   getHistoryYearly,
-  getHistoryWithBranch,
+  getBranchHistory,
 };

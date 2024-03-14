@@ -40,10 +40,10 @@ router.get(
   SalesController.getHistoryYearly,
 );
 
-router.post(
+router.get(
   "/branch-history",
   // auth("superAdmin", "branchManager"),
-  SalesController.getHistoryWithBranch,
+  SalesController.getBranchHistory,
 );
 
 export const SalesRoute = router;
