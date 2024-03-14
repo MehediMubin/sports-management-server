@@ -37,7 +37,7 @@ router.get(
 router.get(
   "/history-yearly",
   // auth("superAdmin", "branchManager"),
-  SalesController.getHistoryYearly,
+  SalesController.getSalesHistoryThisYear,
 );
 
 export const SalesRoute = router;
