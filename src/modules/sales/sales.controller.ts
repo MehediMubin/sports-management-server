@@ -36,8 +36,10 @@ const getSalesHistoryToday = catchAsync(async (req, res) => {
   });
 });
 
-const getHistoryWeekly = catchAsync(async (req, res) => {
-  const result = await SalesService.getHistoryWeekly();
+const getSalesHistoryThisWeek = catchAsync(async (req, res) => {
+  const result = await SalesService.getSalesHistoryThisWeek(
+    req.query.branchName as string,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -70,7 +72,7 @@ export const SalesController = {
   sellProduct,
   getSalesHistoryAllTime,
   getSalesHistoryToday,
-  getHistoryWeekly,
+  getSalesHistoryThisWeek,
   getHistoryMonthly,
   getHistoryYearly,
 };

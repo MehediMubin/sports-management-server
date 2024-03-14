@@ -25,7 +25,7 @@ router.get(
 router.get(
   "/history-weekly",
   // auth("superAdmin", "branchManager"),
-  SalesController.getHistoryWeekly,
+  SalesController.getSalesHistoryThisWeek,
 );
 
 router.get(
