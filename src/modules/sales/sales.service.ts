@@ -287,7 +287,8 @@ const getHistoryYearly = async () => {
 };
 
 const getBranchHistory = async (branch: string) => {
-  if (branch === "all-branches") {
+  if (branch === "All Branches") {
+    branch = "all-branches";
     const result = await SalesModel.find().select("totalPrice");
     return result.reduce((acc, cur) => acc + cur.totalPrice, 0);
   } else {
