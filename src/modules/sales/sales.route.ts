@@ -11,32 +11,32 @@ router.post(
 );
 
 router.get(
-  "/history",
-  auth("superAdmin", "branchManager"),
-  SalesController.getHistory,
+  "/history-all-time",
+  // auth("superAdmin", "branchManager"),
+  SalesController.getSalesHistoryAllTime,
 );
 
 router.get(
-  "/history-daily",
+  "/history-today",
   // auth("superAdmin", "branchManager"),
   SalesController.getSalesHistoryToday,
 );
 
 router.get(
   "/history-weekly",
-  auth("superAdmin", "branchManager"),
+  // auth("superAdmin", "branchManager"),
   SalesController.getHistoryWeekly,
 );
 
 router.get(
   "/history-monthly",
-  auth("superAdmin", "branchManager"),
+  // auth("superAdmin", "branchManager"),
   SalesController.getHistoryMonthly,
 );
 
 router.get(
   "/history-yearly",
-  auth("superAdmin", "branchManager"),
+  // auth("superAdmin", "branchManager"),
   SalesController.getHistoryYearly,
 );
 

@@ -12,8 +12,10 @@ const sellProduct = catchAsync(async (req, res) => {
   });
 });
 
-const getHistory = catchAsync(async (req, res) => {
-  const result = await SalesService.getHistory();
+const getSalesHistoryAllTime = catchAsync(async (req, res) => {
+  const result = await SalesService.getSalesHistoryAllTime(
+    req.query.branchName as string,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -23,9 +25,9 @@ const getHistory = catchAsync(async (req, res) => {
 });
 
 const getSalesHistoryToday = catchAsync(async (req, res) => {
-  let branchName = req.query.branchName as string;
-  if (branchName === "All Branches") branchName = "all-branches";
-  const result = await SalesService.getHistoryDaily(branchName);
+  const result = await SalesService.getSalesHistoryToday(
+    req.query.branchName as string,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -66,7 +68,7 @@ const getHistoryYearly = catchAsync(async (req, res) => {
 
 export const SalesController = {
   sellProduct,
-  getHistory,
+  getSalesHistoryAllTime,
   getSalesHistoryToday,
   getHistoryWeekly,
   getHistoryMonthly,

@@ -39,43 +39,33 @@ const sellProduct = async (payload: TSale) => {
   }
 };
 
-const getSalesHistoryAllTime = async () => {
+const getSalesHistoryAllTime = async (branchName: string) => {
+  const matchStage: { branch?: string } = {};
+
+  if (branchName !== "all-branches") {
+    matchStage["branch"] = branchName;
+  }
+
   const result = await SalesModel.aggregate([
     {
+      $match: matchStage,
+    },
+    {
       $group: {
-        _id: { $toObjectId: "$productId" },
+        _id: null,
         totalQuantity: { $sum: "$quantity" },
         totalSellAmount: { $sum: "$totalPrice" },
       },
-    },
-    {
-      $lookup: {
-        from: "products",
-        localField: "_id",
-        foreignField: "_id",
-        as: "product",
-      },
-    },
-    {
-      $unwind: "$product",
-    },
-    {
-      $sort: {
-        totalQuantity: -1,
-      },
-    },
-    {
-      $limit: 1,
     },
     {
       $project: {
         _id: 0,
         totalQuantity: 1,
         totalSellAmount: 1,
-        name: "$product.name",
       },
     },
   ]);
+
   return result[0];
 };
 
