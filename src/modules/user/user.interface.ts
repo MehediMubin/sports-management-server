@@ -2,6 +2,7 @@ export type TUser = {
   username: string;
   password: string;
   role: "superAdmin" | "branchManager" | "seller";
+  branch?: string;
 };
 
 export const USER_ROLE = {
