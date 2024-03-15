@@ -13,6 +13,17 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+const getBranch = catchAsync(async (req, res) => {
+  const result = await UserService.getBranch(req.params.username);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Branch retrieved successfully",
+    data: result,
+  });
+});
+
 export const UserController = {
   createUser,
+  getBranch,
 };

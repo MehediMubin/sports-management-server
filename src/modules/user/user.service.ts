@@ -6,6 +6,16 @@ const createUser = async (user: TUser) => {
   return result;
 };
 
+const getBranch = async (username: string) => {
+  const result = await UserModel.findOne({ username });
+  let branch = null;
+  if (result?.role === "branchManager") {
+    branch = result?.branch;
+  }
+  return branch;
+};
+
 export const UserService = {
   createUser,
+  getBranch,
 };
