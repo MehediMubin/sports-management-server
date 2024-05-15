@@ -1,5 +1,5 @@
-import { Filter, PriceFilter, TProduct } from "./product.interface";
-import { ProductModel } from "./product.model";
+import {Filter, PriceFilter, TProduct} from "./product.interface";
+import {ProductModel} from "./product.model";
 
 const createProduct = async (product: TProduct) => {
   const res = await ProductModel.create(product);
@@ -56,8 +56,7 @@ const updateProductById = async (id: string, payload: TProduct) => {
 };
 
 const deleteProducts = async () => {
-  const res = await ProductModel.deleteMany({});
-  return res;
+  return ProductModel.deleteMany({});
 };
 
 const deleteProductById = async (id: string) => {
