@@ -1,6 +1,6 @@
 # Sports Management Dashboard (Server)
 
-[Live URL](https://level2-assignment-5.vercel.app/)
+[Live URL](https://level2-assignment-6-server.vercel.app/)
 
 ## Features
 
