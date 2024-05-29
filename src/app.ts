@@ -10,8 +10,9 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://unique-pony-72786f.netlify.app/",
+    origin: "https://unique-pony-72786f.netlify.app",
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 app.use(cookieParser());

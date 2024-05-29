@@ -28,7 +28,7 @@
 
 ## Setup and Usage
 
-1. Clone the repository: `git clone https://github.com/Porgramming-Hero-web-course/l2b2-full-stack-a5-server-side-MehediMubin.git`
+1. Clone the repository: `git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-backend-MehediMubin.git`
 2. Navigate into the project directory: `cd your-repo`
 3. Install the dependencies: `npm install`
 4. Start the application: `npm start`
