@@ -31,5 +31,5 @@
 1. Clone the repository: `git clone https://github.com/MehediMubin/sports-management-server.git`
 2. Navigate into the project directory: `cd your-repo`
 3. Install the dependencies: `npm install`
-4. Start the application: `npm start`
+4. Start the application: `npm start:dev`
 5. Open your browser and navigate to `http://localhost:5000`
